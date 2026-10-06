@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rankaro — Paste your website. Get the truth.</title>
+<meta name="description" content="Rankaro checks your website's SEO in plain words — what's wrong, why it matters, and how to fix it. Built for Indian small businesses.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <div class="brand">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+        <rect x="1" y="1" width="24" height="24" rx="7" fill="#4F46E5"/>
+        <path d="M8 17V9h5.2c2.4 0 3.9 1.3 3.9 3.2 0 1.4-.8 2.4-2 2.9L17.5 17h-2.6l-2-1.9H10V17H8zm2-3.6h3c1.2 0 1.9-.6 1.9-1.5s-.7-1.5-1.9-1.5h-3v3z" fill="#fff"/>
+        <path d="M18.5 7.5l1.8 1.8-1.8 1.8-1.8-1.8 1.8-1.8z" fill="#A5B4FC"/>
+      </svg>
+      <span class="brand-name">Rankaro</span>
+      <span class="demo-badge">DEMO</span>
+    </div>
+    <div class="topbar-tag">SEO reports in plain words</div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <h1>Paste your website.<br>Get the truth.</h1>
+    <p class="sub">Rankaro checks your site like Google sees it — then explains every problem in simple words, with the exact fix. No jargon. No dashboard maze.</p>
+    <form id="auditForm" class="audit-form" autocomplete="off">
+      <input id="urlInput" type="text" inputmode="url" placeholder="yourwebsite.com" aria-label="Website address">
+      <button type="submit" id="auditBtn">Check my site</button>
+    </form>
+    <p class="example">Try an example: <button type="button" class="linklike" id="exampleBtn">mydentalcentre.in</button></p>
+    <div class="trust-row">
+      <span>✓ Free demo</span><span>✓ No signup</span><span>✓ Plain words, not jargon</span>
+    </div>
+  </section>
+
+  <!-- LOADING -->
+  <section id="loading" class="loading hidden" aria-live="polite">
+    <div class="spinner"></div>
+    <p id="loadingMsg">Fetching your website…</p>
+  </section>
+
+  <!-- ERROR -->
+  <section id="errorBox" class="error-box hidden">
+    <h2>Could not check that site</h2>
+    <p id="errorMsg"></p>
+    <button id="retryBtn" class="btn-ghost">Try another website</button>
+  </section>
+
+  <!-- REPORT -->
+  <section id="report" class="report hidden">
+    <div class="report-head">
+      <div class="score-wrap">
+        <svg class="score-ring" width="132" height="132" viewBox="0 0 132 132">
+          <circle cx="66" cy="66" r="56" fill="none" stroke="#E5E7EB" stroke-width="12"/>
+          <circle id="scoreArc" cx="66" cy="66" r="56" fill="none" stroke="#4F46E5" stroke-width="12"
+                  stroke-linecap="round" stroke-dasharray="351.86" stroke-dashoffset="351.86"
+                  transform="rotate(-90 66 66)"/>
+        </svg>
+        <div class="score-num"><span id="scoreVal">0</span><span class="score-grade" id="gradeVal"></span></div>
+      </div>
+      <div class="report-meta">
+        <h2 id="reportTitle">Report</h2>
+        <p class="report-url" id="reportUrl"></p>
+        <div class="counts">
+          <span class="count crit"><b id="critCount">0</b> critical</span>
+          <span class="count warn"><b id="warnCount">0</b> warnings</span>
+          <span class="count good"><b id="passCount">0</b> already good</span>
+        </div>
+        <div class="lang-toggle" role="group" aria-label="Report language">
+          <button type="button" id="langEn" class="lang-btn active">English</button>
+          <button type="button" id="langHi" class="lang-btn">Hinglish</button>
+        </div>
+        <div><button type="button" id="waShare" class="btn-wa">↗ Share on WhatsApp</button></div>
+      </div>
+    </div>
+
+    <div class="stats-grid" id="statsGrid"></div>
+
+    <h3 class="sec-title">Problems found</h3>
+    <div id="issues"></div>
+
+    <h3 class="sec-title">Already good</h3>
+    <ul id="passedList" class="passed-list"></ul>
+
+    <h3 class="sec-title">Unlocks in the full version</h3>
+    <div class="locked-grid">
+      <div class="locked-card"><div class="lock">🔒</div><h4>Keywords &amp; search volume</h4><p>Which words bring customers, how many people search them, and what you should target.</p></div>
+      <div class="locked-card"><div class="lock">🔒</div><h4>Competitors</h4><p>Who outranks you on Google, and exactly why they rank higher than you.</p></div>
+      <div class="locked-card"><div class="lock">🔒</div><h4>AI visibility</h4><p>Does ChatGPT mention your business? Do you appear in Google's AI answers?</p></div>
+    </div>
+    <p class="locked-note">These need a paid data key — connect one in the full version to unlock them.</p>
+
+    <div class="cta-band">
+      <div>
+        <h3>Don't want to fix this yourself?</h3>
+        <p>Tap the button. We'll fix every problem for you — done-for-you, in plain words, with proof.</p>
+      </div>
+      <button id="fixBtn" class="btn-big">Fix it for me</button>
+    </div>
+
+    <button id="newAuditBtn" class="btn-ghost">← Check another website</button>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-in">
+    <span><b>Rankaro</b> demo — built for Indian small businesses.</span>
+    <span class="foot-note">Technical check runs live. Keyword, competitor &amp; AI data unlock with a data key.</span>
+  </div>
+</footer>
+
+<!-- FIX-IT MODAL -->
+<div id="fixModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="fixTitle">
+  <div class="modal-card">
+    <button class="modal-x" id="modalX" aria-label="Close">×</button>
+    <h3 id="fixTitle">Fix it for me</h3>
+    <p class="modal-sub">Tell us where to reach you. We'll reply with a fixed price and timeline — no jargon, no spam.</p>
+    <form id="fixForm" autocomplete="off">
+      <label>Your name<input id="fixName" required placeholder="e.g. Rohan Sharma"></label>
+      <label>Phone / WhatsApp<input id="fixPhone" required inputmode="tel" placeholder="+91 …"></label>
+      <label>Anything we should know?<textarea id="fixNote" rows="3" placeholder="Optional"></textarea></label>
+      <button type="submit" class="btn-big">Request fix</button>
+    </form>
+    <div id="fixDone" class="hidden">
+      <div class="done-tick">✓</div>
+      <h4>Request received!</h4>
+      <p>We'll contact you shortly with your fix plan.<br><span class="tiny">(Demo version — in the full product this reaches the Rankaro team directly.)</span></p>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
